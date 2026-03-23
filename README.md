@@ -115,10 +115,10 @@ notes:
 
 ![boxplot](<figures/ride_length_boxplot_300dpi.png>)
 
-- **Casual rides** are longer (by median) than member rides across both bike types.
+- **Casual rides** have longer durations (by median) than member rides across both bike types.
 - **Casual classic rides** have the longest and most variable ride durations.
     - The middle 50% (IQR) of casual classic rides fall between ~9–31 min vs ~5-16 min for member classic
-- **Classic bikes** for both member and casual rides have longer rides than electric.
+- **Classic bikes** for both member and casual rides have longer ride durations than electric.
 
 ## Long rides have mostly casual riders
 
