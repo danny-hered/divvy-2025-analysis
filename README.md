@@ -11,25 +11,7 @@ The analysis was written in Python using Pandas for data processing and Matplotl
 ## Key findings
 - Member rides consistently show patterns of commute usage, casual rides consistently show patterns of recreational or tourism usage.
 - Casual riders account for half (50.3%) of rides longer than 18 minutes, and their share increases at higher time thresholds
-- 70% of casual rides occur from May through September vs 57.6% of member rides."
-
-## TODO
-
-100% complete these things before being done
-
-
-
-- mass rename file names to simpler, like 01_concat.py
-    - keep 2025 on the .parquet files
-    - but first github backup
-
-
-### Done, but ensure rule is still followed
-- Standardize sig figs to 3. 40.3% 5.34 Million, except for intro paragraph
-- Standardize Classic, Electric. or Electric, non-electric
-- Standardize Overall % casual to something better, maybe Overall casual share or something
-
-
+- 70% of casual rides occur from May through September vs 57.6% of member rides.
 
 ## Project Structure
 
@@ -76,8 +58,8 @@ The pipeline takes 12 months of raw CSV data and processes it into an analysis-r
 
 ![counts](<figures/total_rides_300dpi.png>)
 
-- Dataset: Divvy rides 2025, based in Chicago.
-- Rides are a single trip from a Divvy bike, no link to unique riders, frequent riders contribute more rides.
+- **Dataset**: Divvy rides 2025, based in Chicago.
+- **Grain**: Rides are a single completed trip from a Divvy bike, not one unique rider. Frequent riders can contribute more rides overall.
 
 **Ride Counts**
 
@@ -95,16 +77,14 @@ Members and casual riders show similar usage of electric and classic (non-electr
 | Member | 1.28M | 2.21M | **63.4%** |
 
 
-**Definitions** :is this section worth its weight?:
+**Definitions**
 
 - Casual: a non-member user.
 - Member: a member user.
 - Classic: a non-powered bicycle.
 - Electric: a bicycle with electric pedal assistance.
 - Divvy: a Chicago bike share system.
-- Ride: a use of a Divvy bike >= 1 minute. a single trip from a Divvy bike, no link to unique riders, frequent riders contribute more rides.
-- Weekday Commute Hours: 7-9 am, 4-6pm Mon-Fri.
-- Month-Month: includes data from both months and every month in between inclusively.
+- Weekday Commute Hours: 7:00-9:59 am, 4:00-6:59 pm Mon-Fri.
 
 ## Casual rides are more seasonal than member rides
 
@@ -119,7 +99,7 @@ Members and casual riders show similar usage of electric and classic (non-electr
 
 | | Member rides | Casual rides |
 |---|:---:|:---:|
-| Highest usage periods | 8 am and 5 pm weekdays | Weekends and afternoons |
+| Highest usage periods | 8:00 - 8:59 am and 5:00 - 5:59 pm weekdays | Weekends and afternoons |
 | % of "user type" rides during weekday commute hours | **38.5%** | 25.3% |
 | % of "user type" rides during weekends | 23.4% | **37.2%** |
 
@@ -127,7 +107,9 @@ Members and casual riders show similar usage of electric and classic (non-electr
 - **Casual rides** are 1.59x more concentrated on weekends than member rides, indicating that casual riders have a higher tendency to use the service for recreation. 
 - **Member rides** are 1.52x more concentrated around weekday commute hours than casual rides, indicating that member riders have a higher tendency to use the service for commute purposes.
 
-note: "Weekday commute hours" defined as: 7-9 am, 4-6pm Mon-Fri
+notes: 
+- "Weekday commute hours" defined as: 7:00-9:59 am, 4:00-6:59 pm Mon-Fri
+- Heatmap hours use 24-hour clock, so 17 = 5:00–5:59 pm
 
 ## How long they usually ride
 
@@ -155,13 +137,11 @@ note: "Weekday commute hours" defined as: 7-9 am, 4-6pm Mon-Fri
 
 *This pattern is consistent with recreational or visitor usage among casual riders*
 
-note: at ≥ 46 minutes casual (non-member) rides using classic (non-electric) bikes alone account for 50.05% of all rides!
-
 ![seasonaltailbehaviour](<figures/seasonal_tailbehaviour_300dpi.png>)
 
-- Casual rides are the majority of long rides throughout the year
+- In every quarter, casual share rises with ride duration threshold
 - Even in Q1 where casual rides are only 23% of all rides, they account for half of rides longer than 36 minutes.
-- During the busier seasons Q2 and Q3, 
+- During the busier quarters Q2 and Q3, the threshold at which casual rides become the majority drops to 15 and 14 minutes respectively
 
 | Season | Baseline casual % | Casual majority threshold (min) |
 |--------|--------------------------|----------------------------------|
@@ -195,7 +175,7 @@ The dataset analyzed contains rides rather than unique users, with no link to un
 **Recommendation**
 - Frequent weekend riders would gain value from membership. This group can be targeted with weekend-related promotional material.
 
-### 3: Target Casual riders who take long rides
+### 3: Target casual riders who take long rides
 
 **Supporting Data**
 - Casual riders account for half (50.3%) of rides longer than 18 minutes, despite being only 35.5% of total rides.
@@ -218,7 +198,7 @@ The dataset analyzed contains rides rather than unique users, with no link to un
 ## Further work
 
 - Interested in joining this dataset with a weather/temperature database. The extra weather context would allow for removing confounding factors in seasonality.
-- Spatial data analysis: Latitude-Longitude and Station information present in the raw dataset offer a different lens into casual and member usage. for instance, Navy Pier (recreational area) was the most commonly used station for Casual riders, and it saw more usage than any station members used.
+- Spatial data analysis: Latitude-Longitude and Station information present in the raw dataset offer a different lens into casual and member usage. for instance, Navy Pier (recreational area) was the most commonly used station for casual riders, and it saw more usage than any station members used.
 
 ## Data Source Details
 
