@@ -1,6 +1,6 @@
 # This script readys the full 2025 Divvy trip dataset for cleaning and analysis
 
-# executes after 01_concat_divvy_tripdata.py
+# executes after 01_concat.py
 
 import pandas as pd
 import geopy.distance

@@ -1,29 +1,27 @@
 # How are Member and Casual Divvy rides different? (2025)
 
-**Tools** Python, Pandas, Matplotlib / Seaborn, Parquet, Jupyter
+Divvy is a Chicago bike share system. 
 
-Divvy is a Chicago bike share system. This project analyzes 5.4 million Divvy rides from 2025 to compare how member and casual (non-member) riders use the service through the lenses of ride duration, seasonality, time of day, and day of week.
+This project analyzes 5.4 million Divvy rides from 2025 to compare how member and casual (non-member) riders use the service through the lenses of ride duration, seasonality, time of day, and day of week.
 
 The analysis was written in Python using Pandas for data processing and Matplotlib/Seaborn for visualization.
 
-- Fun Fact: In 2025 Divvy users rented bikes for a total of 169 years!
-
 ## Key findings
+- While casual rides make up only 35.5% of total rides, they account for half (50.3%) of rides longer than 18 minutes.
 - Member rides consistently show patterns of commute usage, casual rides consistently show patterns of recreational or tourism usage.
-- Casual riders account for half (50.3%) of rides longer than 18 minutes, and their share increases at higher time thresholds
-- 70% of casual rides occur from May through September vs 57.6% of member rides.
+- Casual rides are more seasonal than member rides: 70% of casual rides occur from May through September vs 57.6% of member rides.
 
 ## Project Structure
 
 | File | Description |
 |------|-------------|
 | [README](README.md) | You are here: Project summary |
-| [report.ipynb](report.ipynb) | Reproducible analysis notebook |
+| [report](report.ipynb) | Reproducible Jupyter notebook that generated all figures and numbers in this document |
 | [CHANGE_LOG](CHANGE_LOG.md) | Details on data removed during cleaning |
 | [00_run_pipeline](00_run_pipeline.py) | Run 01 -> 02 -> 03 in sequence | 
-| [01_concat_divvy_tripdata](01_concat_divvy_tripdata.py) | Combines 12 months of raw CSV into one table |
-| [02_prepare_divvy_tripdata](02_prepare_divvy_tripdata.py) | Feature creation and datetime correction |
-| [03_process_and_clean](03_process_and_clean.py) | Removes impossible and sub-1-minute rides |
+| [01_concat](01_concat.py) | Combines 12 months of raw CSV into one table |
+| [02_prepare](02_prepare.py) | Feature creation and datetime correction |
+| [03_clean](03_clean.py) | Removes impossible and sub-1-minute rides |
 
 ## Data Cleaning
 
@@ -32,7 +30,7 @@ The analysis was written in Python using Pandas for data processing and Matplotl
 **Raw data inspection**
 - No duplicate rows, or duplicate `ride_id` values found.
 - No missing data was found in key analysis columns (`ride_id`, `rideable_type`, `started_at`, `ended_at`, `member_casual`).
-- Every entry in `member_casual` or `rideable_type` columns was confirmed as valid.
+- Every entry in the `member_casual` and `rideable_type` columns was validated.
 
 **Removing rides < 60 seconds**
 - 99.99% of sub-60s rides were electric (vs 64.92% overall), consistent with users immediately returning a malfunctioning or uncharged electric bike, or system errors. This data is likely not representative of trip behavior and was removed from this analysis.
@@ -67,6 +65,8 @@ The pipeline takes 12 months of raw CSV data and processes it into an analysis-r
 - Casual: 1,920,483 | 35.5%
 - Member: 3,485,110 | 64.4%
 
+*Fun Fact: In 2025 Divvy users rented bikes for a total of 169 years!*
+
 **Bike Type**
 
 Members and casual riders show similar usage of electric and classic (non-electric) bikes.
@@ -91,7 +91,7 @@ Members and casual riders show similar usage of electric and classic (non-electr
 ![Monthly seasonality](<figures/monthly_use_300dpi.png>)
 
 - 70.0% of all casual rides occur from May through September (vs 57.6% of member rides May-Sep), peaking at 42.4% casual share in August (vs 35.5% overall casual share).
-- December-February, the lowest usage months, account for 4.05% of casual rides and 9.87% of member rides. This indicates member usage is more consistent year round.
+- December-February, the lowest usage months, account for 4.05% of casual rides and 9.87% of member rides. This indicates member usage is more consistent year-round.
 
 ## When they ride
 
@@ -116,8 +116,8 @@ notes:
 ![boxplot](<figures/ride_length_boxplot_300dpi.png>)
 
 - **Casual rides** are longer (by median) than member rides across both bike types.
-- **Casual classic rides** have the longest and most variable ride lengths.
-    - The middle 50% (IQR) of casual classic rides fall between ~9–31 min vs ~5-16 min for member classic : IQR, middle box
+- **Casual classic rides** have the longest and most variable ride durations.
+    - The middle 50% (IQR) of casual classic rides fall between ~9–31 min vs ~5-16 min for member classic
 - **Classic bikes** for both member and casual rides have longer rides than electric.
 
 ## Long rides have mostly casual riders
@@ -125,7 +125,7 @@ notes:
 ![tailbehaviour](<figures/tailbehaviour_300dpi.png>)
 
 - While casual rides make up only 35.5% of total rides, they account for half (50.3%) of rides longer than 18 minutes.
-- The further down the tail of the ride length distribution, the more it becomes dominated by casual rides.
+- The further down the tail of the ride duration distribution, the more it becomes dominated by casual rides.
 - 80.8% of rides longer than 60 minutes had casual riders.
 
 | Threshold (min) | Member rides ≥ T | Casual rides ≥ T | Casual % ≥ T |
@@ -152,7 +152,7 @@ notes:
 
 ## Conclusions
 
-Overall, casual rides across every stage of this analysis have shown patterns consistent with recreational or tourism based usage of the Divvy service, while member rides have shown patterns consistent with functional and commute usage.
+Overall, casual rides across every stage of this analysis have shown patterns consistent with recreational or tourism-based usage of the Divvy service, while member rides have shown patterns consistent with functional and commute usage.
  
 The dataset analyzed contains rides rather than unique users, with no link to unique riders possible, so the data cannot inform on why casual users have not become members. Additional data such as surveys could provide insight to user sentiment.
 
@@ -186,19 +186,20 @@ The dataset analyzed contains rides rather than unique users, with no link to un
 ## What I learned
 
 - Building a reproducible data pipeline: This structure will be used in my future and ongoing projects to ensure proper data hygiene.
-- Clean separation of raw data processing stages greatly helped with this project. Having access to the data at every stage directly helped with confirming that data with duration < 60s would add bias to my results and should be removed. it also simplified creating the report.ipynb notebook from the rough exploratory analysis.ipynb notebook, as feature creation is handled prior to the analysis.
 
-- Awareness of the grain: one row/entry = one interaction with a Divvy bike, independent of user. This informed the entire analysis.
+- Clean separation of raw data processing stages greatly helped with this project. Having access to the data at every stage directly helped with confirming that data with duration < 60s would add bias to my results and should be removed. Separating feature creation into the pipeline simplified creating the report.ipynb notebook from the rough exploratory draft notebook.
+
+- Awareness of the grain: one entry = one interaction with a Divvy bike, independent of user. This informed the entire analysis.
 
 - The value of a full year: Without context as to how busy in season months are and how slow off-season months are, the analysis would run the risk of misrepresenting user behavior.
 
-- Sanity checking findings: the 18 minute threshold and trend of the tail of the ride length distribution being primarily casual rides could have been entirely summer behavior. The pattern was compared across quarters, and determined to not be purely a summer volume driven characteristic.
+- Sanity checking findings: casual rider share increasing with ride duration threshold could have been just seasonal volume. Splitting the analysis by quarter confirmed the pattern holds year-round. See appendix for a monthly breakdown.
 
 
 ## Further work
 
 - Interested in joining this dataset with a weather/temperature database. The extra weather context would allow for removing confounding factors in seasonality.
-- Spatial data analysis: Latitude-Longitude and Station information present in the raw dataset offer a different lens into casual and member usage. for instance, Navy Pier (recreational area) was the most commonly used station for casual riders, and it saw more usage than any station members used.
+- Spatial data analysis: Latitude-Longitude and Station information present in the raw dataset offer a different lens into casual and member usage. For instance, Navy Pier (recreational area) was the most commonly used station for casual riders, and it saw more usage than any single station members used.
 
 ## Data Source Details
 
@@ -208,3 +209,12 @@ The dataset analyzed contains rides rather than unique users, with no link to un
 - License: https://divvybikes.com/data-license-agreement by Motivate International Inc
 - Privacy: data is anonymized. No attempt was made to correlate the data with any personal information of customers.
 - [CHANGE_LOG](CHANGE_LOG.md): Features added, and data removed during cleaning.
+
+
+## Appendix
+
+### Monthly casual share by ride duration threshold
+
+![monthly tail behaviour](figures/monthly_tailbehaviour_300dpi.png)
+
+*The threshold finding was inspected at month precision. The pattern holds across all months, though January and February do not cross 50% casual within the 60-minute window.*
