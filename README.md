@@ -163,7 +163,7 @@ The dataset analyzed contains rides rather than unique users, with no link to un
 
 **Supporting Data**
 - Casual ride share is highest from May through September, exceeding the overall casual share of 35.5%.
-- 70% of all casual rides occur May through September, vs 57.6% of member rides.
+- 70.0% of all casual rides occur May through September, vs 57.6% of member rides.
 
 **Recommendation**
 - Member recruitment May through September would take advantage of the casual ride busy season and highest casual share.
