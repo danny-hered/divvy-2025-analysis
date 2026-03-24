@@ -9,7 +9,7 @@ The analysis was written in Python using Pandas for data processing and Matplotl
 ## Key findings
 - While casual rides make up only 35.5% of total rides, they account for half (50.3%) of rides longer than 18 minutes.
 - Member rides consistently show patterns of commute usage, casual rides consistently show patterns of recreational or tourism usage.
-- Casual rides are more seasonal than member rides: 70% of casual rides occur from May through September vs 57.6% of member rides.
+- Casual rides are more seasonal than member rides: 70.0% of casual rides occur from May through September vs 57.6% of member rides.
 
 ## Project Structure
 
@@ -63,8 +63,8 @@ https://github.com/user-attachments/assets/feaac47b-ef6e-4c62-9ab2-c3a22b5a61a2
 **Ride Counts**
 
 - Total: 5,405,593
-- Casual: 1,920,483 | 35.5%
-- Member: 3,485,110 | 64.4%
+- Casual: 1,920,483 (35.5%)
+- Member: 3,485,110 (64.5%)
 
 *Fun Fact: In 2025 Divvy users rented bikes for a total of 169 years!*
 
@@ -218,4 +218,4 @@ The dataset analyzed contains rides rather than unique users, with no link to un
 
 ![monthly tail behaviour](figures/monthly_tailbehaviour_300dpi.png)
 
-*The threshold finding was inspected at month precision. The pattern holds across all months, though January, February and December do not cross 50% casual within the 60-minute window.*
+*The threshold finding was inspected by month. The pattern holds across all months, though January, February and December do not cross 50% casual within the 60-minute window.*
