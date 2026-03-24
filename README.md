@@ -38,9 +38,8 @@ The analysis was written in Python using Pandas for data processing and Matplotl
 
 See **Data Cleaning Summary** in [report.ipynb](report.ipynb) for calculations.
 
-
 **Pipeline Structure**
-The pipeline takes 12 months of raw CSV data and processes it into an analysis-ready parquet file. Parquet is a columnar data storage format that allows for efficient compression and fast reading and writing, which proved useful at the 5.4 million entry scale of this project's dataset.
+The pipeline takes 12 months of raw CSV data and processes it into an analysis-ready parquet file for efficient processing of 5.4 million entries.
 
 `00_run_pipeline.py` runs the following in sequence
 | Script | Input | Output |
@@ -48,6 +47,8 @@ The pipeline takes 12 months of raw CSV data and processes it into an analysis-r
 | 01_concat | `01_raw_csv/YYYYMM-divvy-tripdata.csv(all 2025)` | `02_processed/01_concat_2025_tripdata.parquet` |
 | 02_prepare | `02_processed/01_concat_2025_tripdata.parquet` | `02_processed/02_prepared_2025_tripdata.parquet` |
 | 03_clean | `02_processed/02_prepared_2025_tripdata.parquet` | `02_processed/03_cleaned_2025_tripdata.parquet` |
+
+https://github.com/user-attachments/assets/88140aa3-0136-4651-9f1d-6cba548742c4
 
 - See [CHANGE_LOG](CHANGE_LOG.md) for full cleaning details.
 - [Data Source Details](#data-source-details) for more on where the data came from.
