@@ -48,7 +48,7 @@ The pipeline takes 12 months of raw CSV data and processes it into an analysis-r
 | 02_prepare | `02_processed/01_concat_2025_tripdata.parquet` | `02_processed/02_prepared_2025_tripdata.parquet` |
 | 03_clean | `02_processed/02_prepared_2025_tripdata.parquet` | `02_processed/03_cleaned_2025_tripdata.parquet` |
 
-https://github.com/user-attachments/assets/88140aa3-0136-4651-9f1d-6cba548742c4
+https://github.com/user-attachments/assets/ec740e72-d82c-497e-9c47-0b8ff18f6b63
 
 - See [CHANGE_LOG](CHANGE_LOG.md) for full cleaning details.
 - [Data Source Details](#data-source-details) for more on where the data came from.

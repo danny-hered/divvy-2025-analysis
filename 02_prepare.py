@@ -1,14 +1,4 @@
-# This script readys the full 2025 Divvy trip dataset for cleaning and analysis
-
-# executes after 01_concat.py
-
 import pandas as pd
-import geopy.distance
-#from geopy.distance import geodesic
-
-import os
-print("CWD:", os.getcwd())
-
 
 df = pd.read_parquet('data/02_processed/01_concat_2025_tripdata.parquet')
 
@@ -29,4 +19,4 @@ df['day_of_year'] = df['started_at'].dt.day_of_year
 
 df.to_parquet('data/02_processed/02_prepared_2025_tripdata.parquet', index=False)
 
-print("02 Prepare complete. Data saved to 'data/02_processed/02_prepared_2025_tripdata.parquet'")
+print("02 Prepare complete.\nData saved to '02_prepared_2025_tripdata.parquet'")
