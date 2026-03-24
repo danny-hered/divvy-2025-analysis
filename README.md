@@ -217,4 +217,4 @@ The dataset analyzed contains rides rather than unique users, with no link to un
 
 ![monthly tail behaviour](figures/monthly_tailbehaviour_300dpi.png)
 
-*The threshold finding was inspected at month precision. The pattern holds across all months, though January and February do not cross 50% casual within the 60-minute window.*
+*The threshold finding was inspected at month precision. The pattern holds across all months, though January, February and December do not cross 50% casual within the 60-minute window.*
