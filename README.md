@@ -20,7 +20,7 @@ The analysis was written in Python using Pandas for data processing and Matplotl
 | [CHANGE_LOG](CHANGE_LOG.md) | Details on data removed during cleaning |
 | [00_run_pipeline](00_run_pipeline.py) | Run 01 -> 02 -> 03 in sequence | 
 | [01_concat](01_concat.py) | Combines 12 months of raw CSV into one table |
-| [02_prepare](02_prepare.py) | Feature creation and datetime correction |
+| [02_prepare](02_prepare.py) | Feature creation and datetime conversion |
 | [03_clean](03_clean.py) | Removes impossible and sub-1-minute rides |
 
 ## Data Cleaning
@@ -48,7 +48,7 @@ The pipeline takes 12 months of raw CSV data and processes it into an analysis-r
 | 02_prepare | `02_processed/01_concat_2025_tripdata.parquet` | `02_processed/02_prepared_2025_tripdata.parquet` |
 | 03_clean | `02_processed/02_prepared_2025_tripdata.parquet` | `02_processed/03_cleaned_2025_tripdata.parquet` |
 
-https://github.com/user-attachments/assets/ec740e72-d82c-497e-9c47-0b8ff18f6b63
+https://github.com/user-attachments/assets/feaac47b-ef6e-4c62-9ab2-c3a22b5a61a2
 
 - See [CHANGE_LOG](CHANGE_LOG.md) for full cleaning details.
 - [Data Source Details](#data-source-details) for more on where the data came from.
